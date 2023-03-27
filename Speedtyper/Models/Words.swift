@@ -41,7 +41,6 @@ class Words {
         // creates a random index from new array length
         let randomIndex = Int.random(in: 0..<wordsOfDesiredLength.count)
         // returns a random word from new array
-        print(wordsOfDesiredLength[randomIndex])
         return String(wordsOfDesiredLength[randomIndex])
         
     }
