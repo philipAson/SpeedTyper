@@ -7,11 +7,15 @@
 
 import Foundation
 
+// making game codable since Date is a complex data type that cannot be
+// directly represented as a simple sequence of bytes and thereby stored in
+// userdefaults.
 struct Game: Codable {
     var score: Int
     var time: Int
     var date: Date
     
+    // implemented to present date in suitable formatt
     var dateString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -22,20 +26,5 @@ struct Game: Codable {
         self.score = score
         self.time = time
         self.date = Date()
-    }
-    
-    func toDictionary() -> [String: Any] {
-        return ["score": score, "time": time, "date": date.timeIntervalSince1970]
-    }
-    
-    static func fromDictionary(_ dict: [String: Any]) -> Game? {
-        guard let score = dict["score"] as? Int,
-              let time = dict["time"] as? Int,
-              let dateInterval = dict["date"] as? TimeInterval else {
-            return nil
-        }
-        var game = Game(score: score, time: time)
-        game.date = Date(timeIntervalSince1970: dateInterval)
-        return game
     }
 }

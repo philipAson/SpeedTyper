@@ -63,8 +63,7 @@ class NewGameViewController: UIViewController {
         secondsPerWordLabel.text = String(secondsPerWord)
         elapsedTimeLabel.text = "time: \(formatSeconds(seconds: elapsedTime))"
         
-        // gameModel ?
-        if secondsPerWord <= 0 || score == 20 {
+        if GameModel().gameOver(secondsPerWord, score) {
             let newGame = Game(score: score, time: elapsedTime)
             SavedGames.shared.addHighscore(newGame)
             answerTextField.isEnabled = false
