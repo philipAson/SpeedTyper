@@ -8,13 +8,15 @@
 import UIKit
 
 class HighscoreTableViewController: UITableViewController {
-    var highscores: [Game] = []
-
+    
+    private var highscores : [Game] = []
+    var lastGame : Game?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Retrieve highscores from SavedGames
         highscores = SavedGames.shared.getHighscores()
+        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,10 +34,18 @@ class HighscoreTableViewController: UITableViewController {
         let game = highscores[indexPath.row]
 
         // Configure cell with game data
-        cell.textLabel?.text = "Score: \(game.score), Time: \(game.time), Date: \(game.dateString)"
+        cell.textLabel?.text = "Score: \(game.score), Time: \(game.time), Date: \(game.date)"
+        
+        // Highlighting lastGame in TableView
+        if lastGame == game {
+            cell.backgroundColor = .magenta
+        } else {
+            cell.backgroundColor = .white
+        }
         
         return cell
     }
+    
     
 
     /*

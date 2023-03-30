@@ -12,12 +12,15 @@ class NewGameViewController: UIViewController {
     // Install cocoaPods and implement (pod 'SwipeCellKit')
     
     var timer : Timer?
+    
     let defaults = UserDefaults.standard
+    let highscoreSegue = "highscoreSegue"
     
     private var secondsPerWord = 5
     private var score = 0
     private var elapsedTime = 0
     
+    private var newGame : Game?
     private var usedWords : [String] = []
     
     private var randomWord = Words().getRandomWord(ofLength: 5)
@@ -64,13 +67,16 @@ class NewGameViewController: UIViewController {
         elapsedTimeLabel.text = "time: \(formatSeconds(seconds: elapsedTime))"
         
         if GameModel().gameOver(secondsPerWord, score) {
-            let newGame = Game(score: score, time: elapsedTime)
-            SavedGames.shared.addHighscore(newGame)
+            newGame = Game(score: score, time: elapsedTime)
+            SavedGames.shared.addHighscore(newGame!)
             answerTextField.isEnabled = false
             timer.invalidate()
             
             usedWords.removeAll()
-            print("savedGame \nscore: \(newGame.score)\ntime: \(newGame.time)\ndate: \(newGame.date)")
+            
+            print("savedGame \nscore: \(newGame!.score)\ntime: \(newGame!.time)\ndate: \(newGame!.date)")
+            
+            performSegue(withIdentifier: highscoreSegue, sender: self)
         }
     }
     
@@ -79,15 +85,16 @@ class NewGameViewController: UIViewController {
         let seconds = seconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == highscoreSegue{
+            
+            let destinationVC = segue.destination as? HighscoreTableViewController
+            // setting newGame to LastGame in order to present your game
+            destinationVC?.lastGame = newGame!
+        }
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
-
 }

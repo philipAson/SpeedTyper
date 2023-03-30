@@ -35,7 +35,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uv7-x6-Ntx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2024" y="780"/>
+            <point key="canvasLocation" x="2024" y="808"/>
         </scene>
         <!--Start Screen View Controller-->
         <scene sceneID="Ktq-bf-h6o">
@@ -208,13 +208,17 @@
                         <outlet property="presentWordLabel" destination="3X1-Q2-oOI" id="Dwm-j3-say"/>
                         <outlet property="scoreLabel" destination="klZ-3x-SFE" id="jYV-hV-pLU"/>
                         <outlet property="secondsPerWordLabel" destination="qKv-KH-UPl" id="i6l-nw-stH"/>
+                        <segue destination="KGM-2V-Ivz" kind="show" identifier="highscoreSegue" id="f7T-fr-0X5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4v-bi-vEx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023.6641221374045" y="74.647887323943664"/>
+            <point key="canvasLocation" x="2024" y="75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="f7T-fr-0X5"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Highscore" width="1034" height="150"/>
         <image name="Speed_Type" width="1168" height="151"/>
